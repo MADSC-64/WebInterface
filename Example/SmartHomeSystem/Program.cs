@@ -20,10 +20,6 @@ namespace SmartHomeSystem
 
             try
             {
-                Console.WriteLine("Loading Config");
-
-                ConfigManager.LoadSettings();
-                ConfigManager.GetSettingInt("test");
 
                 Console.Write("Initiating Response Interfaces");
 
