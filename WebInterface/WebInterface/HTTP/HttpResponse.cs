@@ -115,24 +115,15 @@ namespace WebInterface.HTTP
 
         public static HttpResponse FromStream(Stream stream)
         {
-            try
-            {
-                StreamReader reader = new StreamReader(stream);
+            StreamReader reader = new StreamReader(stream);
 
-                //Gets All Path And Method Info From Request Line
-                DecodeStatusLine(reader, out int responseCode);
+            //Gets All Path And Method Info From Request Line
+            DecodeStatusLine(reader, out int responseCode);
 
-                //Gets All Pressent Headers
-                var headers = GetHeaders(reader);
+            //Gets All Pressent Headers
+            var headers = GetHeaders(reader);
 
-                return new HttpResponse("test", responseCode, "text/html", headers);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Http Decoding Error:" + e.ToString());
-                return null;
-            }
+            return new HttpResponse("test", responseCode, "text/html", headers);
         }
 
         static void DecodeStatusLine(StreamReader reader, out int responseCode)

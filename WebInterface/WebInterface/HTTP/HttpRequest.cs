@@ -13,32 +13,23 @@ namespace WebInterface.HTTP
         //---------------------Decoding---------------------------
         public static HttpRequest FromStream(Stream stream)
         {
-            try
-            {
-                StreamReader reader = new StreamReader(stream);
+            StreamReader reader = new StreamReader(stream);
 
-                //Gets All Path And Method Info From Request Line
-                DecodeRequestLine(reader, out string method, out string path);
+            //Gets All Path And Method Info From Request Line
+            DecodeRequestLine(reader, out string method, out string path);
 
-                //Gets All Pressent Headers
-                var headers = GetHeaders(reader);
+            //Gets All Pressent Headers
+            var headers = GetHeaders(reader);
 
-                //Gets Http Request Data
-                var data = GetData(reader);
+            //Gets Http Request Data
+            var data = GetData(reader);
 
-                //Gets Full Request Url
-                Uri requestPath = UrlProcessing.GetAbsoluteUrl(path, headers);
+            //Gets Full Request Url
+            Uri requestPath = UrlProcessing.GetAbsoluteUrl(path, headers);
 
-                var queryParams = GetQueryParameters(requestPath);
+            var queryParams = GetQueryParameters(requestPath);
 
-                return new HttpRequest(requestPath, method, headers, queryParams, data);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Http Decoding Error:" + e.ToString());
-                return null;
-            }
+            return new HttpRequest(requestPath, method, headers, queryParams, data);
         }
 
         static void DecodeRequestLine(StreamReader reader, out string method, out string path)
@@ -77,16 +68,9 @@ namespace WebInterface.HTTP
 
         public void WriteToStream(Stream stream)
         {
-            try
-            {
-                string httpHeaders = GenerateHttpHeaders();
+            string httpHeaders = GenerateHttpHeaders();
 
-                WriteHttpHeadersToStream(httpHeaders, stream);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception While Writing Response:" + e.ToString());
-            }
+            WriteHttpHeadersToStream(httpHeaders, stream);
         }
         //---------------------Constructors-----------------------
 

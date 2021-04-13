@@ -19,6 +19,8 @@ namespace WebInterface.API
 
                 request.WriteToStream(stream);
 
+                stream.ReadTimeout = 500;
+
                 var response = HttpResponse.FromStream(stream);
 
                 return response;
